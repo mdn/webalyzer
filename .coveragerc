@@ -1,0 +1,5 @@
+[run]
+source = redunter
+
+[report]
+omit = */migrations/*

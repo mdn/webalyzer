@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page_title %}Source view {{ result.url }}{% endblock %}
+
+{% block extrahead %}
+<style>
+{{ pygments_css | safe }}
+.highlighttable td {
+  padding: 1px 4px;
+}
+.highlight {
+  background-color: white;
+}
+.linenos pre {
+  color: #999;
+}
+</style>
+{% endblock %}
+
+{% block row %}
+  <h3>Source view for <a href="{{ result.url }}">{{ result.url }}</a></h3>
+  <h5>
+    <a href="{{ url('analyzer:analyzed', domain) }}">
+      Back to analysis for <code>{{ domain }}</code>
+    </a>
+  </h5>
+
+{{ code | safe }}
+{# <pre>{{ result.before }}</pre> #}
+{% endblock %}
+
+{% block extrajs %}
+{# <script src="{{ static('analyzer/js/analyzed.js') }}"></script>#}
+{% endblock %}
