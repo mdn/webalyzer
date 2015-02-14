@@ -45,9 +45,10 @@ Jinja2==2.7.3
 
 # sha256: o71QUd0X6dUOip8tNiUI6C1wYwEP3AbV4HzjYI54D-Y
 jingo==0.7
-# sha256: qAv087lKioUYVwIxy76v2ndy88GfMsdQyZeQYT2UmsY
-# sha256: e72vAltyZG_GFIMoTtn_xQ40_KpoOpOdeI9G9qjH2Z8
-mincss==0.8.2
+# sha256: X4aqvtTqlNkw3aYh6xlFgSNpcVACrt1OlVs6oLqKc8g
+# sha256: mWV1Iecfv6KfvMkmAF5UjPexfl2fxVXa05uPXs-8c_A
+# sha256: 9MtzwupJxQm6OvJNmtir7U6kLZgJs6guzTNxhkwl5F0
+mincss==0.8.5
 # sha256: BTWn4nAUh0snrjpNM-h0njRb36YnZhlSCLeZa_EQBoI
 cssselect==0.9.1
 # sha256: 8DnhdbUqDnmH28j5L_FwE3muz-3sVo5cjw8Ox-5dTlQ
@@ -71,3 +72,22 @@ cssutils==1.0
 # sha256: Xe0vqQlP19_rPakmNkCf1wKg0H1gYoNQTX7gRAHO5cs
 # sha256: cyCRkITm2sj0VAY4pGRHo71zD8oXKvwX0sA-7SLPT1E
 pygments==2.0.2
+# sha256: HwRtz17HEu076GhLnzPJW3bijNHIJdsPXhVXv9h7N0U
+# sha256: e3c179Ox4jI9yfzvBgs4DQX18YvQ8kf16edKYoJ53mY
+requests==2.5.1
+# sha256: qZ245ZwSATitinLuztzCS0UQ0u7TzkghO34y8izE7m4
+pyOpenSSL==0.14
+# sha256: 0P40ymJSUdKblkxDRxQBWjBj6MLXTKMLL5ZPXzHTTbM
+# sha256: 2-Wqhni1PbnhU_7u3jiNxfvaVnvik8Pk8UEqNgEvHvA
+# sha256: zIBtQ_Pnm-QPkj2U9ULyOpTG3buaYyWLC_h18yVQiXM
+ndg-httpsclient==0.3.2
+# sha256: ViwdlP3nclV_bH_MzYjE8bWXQRIJ9pQ3vMzfC1XhmNo
+# sha256: zyEZCBbe1eKqmYUsyLcvl2vo3X4GVHCvVS5N02IJoPk
+# sha256: CuAd0p4lO-IS1LAsueyWfPb0I6G43ow-ZVBZHKDVowk
+# sha256: bTs1EQn0GQzZdA12M4RpkIGl8uuNc9qn5IUAn7ZGGMA
+# sha256: 5LC7qaDGJqSTLdBeiSSJwki_7ptmZ4j1agX2VLd_gz0
+# sha256: _QhkM6e0Ktzuene985GEY1Du5ibmxoLG58nV-WTgTXk
+# sha256: Db2pD0HvGGBVVxS7xigQGXSOcCo759Oupp0Kclgn4x4
+# sha256: xMQmSMaK_U4YJIY2XII6nNjnVXDWz0kJ1_CUgzP7PCA
+# sha256: 5PgdU8Uz9r2VJrBH8Ef3sQHCSrFzOcGnrY-YslwQHqs
+pyasn1==0.1.7

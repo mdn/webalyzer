@@ -1,9 +1,11 @@
 import time
 from collections import OrderedDict
 
+import requests
 from mincss.processor import Processor, DownloadError
 import cssutils
 
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db.models import Sum, Max
@@ -11,6 +13,26 @@ from django.db import transaction
 
 from redunter.collector.models import Page
 from redunter.analyzer.models import Result, Suspect
+
+
+class ExtendedProcessor(Processor):
+
+    download_cache = {}
+
+    def download(self, url):
+        cached = self.download_cache.get(url)
+        if cached:
+            ts, content = cached
+            age = time.time() - ts
+            if age < 3600:
+                return content
+
+        r = requests.get(url, verify=not settings.DEBUG)
+        if r.status_code < 400:
+            self.download_cache[url] = (time.time(), r.content)
+            return r.content
+        else:
+            raise DownloadError("%s - %s" % (r.status_code, url))
 
 
 def start(request):
@@ -36,7 +58,7 @@ def analyze(request):
 
     domain = request.POST['domain']
     pages = Page.objects.filter(domain=domain)
-    processor = Processor()
+    processor = ExtendedProcessor()
     t0 = time.time()
     for page in pages:
         try:
