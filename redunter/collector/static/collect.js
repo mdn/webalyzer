@@ -13,7 +13,7 @@
       console.warn("Unable to XHR");
       return;
     }
-    req.open('POST', 'http://localhost:9000/collector/', true);
+    req.open('POST', 'http://redunter.dev/collector/', true);
     req.onreadystatechange = function (response) {
       if (req.readyState === 4) {
         if (req.status === 200) {

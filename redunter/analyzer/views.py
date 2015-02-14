@@ -1,9 +1,13 @@
 import time
+import difflib
 from collections import OrderedDict
 
 import requests
 from mincss.processor import Processor, DownloadError
 import cssutils
+from pygments import highlight
+from pygments.lexers import CssLexer, DiffLexer
+from pygments.formatters import HtmlFormatter
 
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,6 +17,7 @@ from django.db import transaction
 
 from redunter.collector.models import Page
 from redunter.analyzer.models import Result, Suspect
+from redunter.base.helpers import diff_table
 
 
 class ExtendedProcessor(Processor):
@@ -24,6 +29,8 @@ class ExtendedProcessor(Processor):
         if cached:
             ts, content = cached
             age = time.time() - ts
+            # this caching stuff is pointless unless the caching it
+            # written to disk or something
             if age < 3600:
                 return content
 
@@ -191,9 +198,6 @@ def source_view(request, domain, id):
     result = get_object_or_404(Result, id=id)
     assert result.domain == domain, result.domain
     context = {}
-    from pygments import highlight
-    from pygments.lexers import CssLexer
-    from pygments.formatters import HtmlFormatter
 
     html_formatter = HtmlFormatter(linenos=True)
     context['code'] = highlight(
@@ -205,3 +209,20 @@ def source_view(request, domain, id):
     context['result'] = result
     context['pygments_css'] = html_formatter.get_style_defs('.highlight')
     return render(request, 'analyzer/source_view.html', context)
+
+
+def diff_view(request, domain, id):
+    result = get_object_or_404(Result, id=id)
+    assert result.domain == domain, result.domain
+    context = {}
+
+    html_formatter = HtmlFormatter(linenos=True)
+    context['code'] = highlight(
+        diff_table(result.before, result.after),
+        DiffLexer(),
+        html_formatter
+    )
+    context['domain'] = domain
+    context['result'] = result
+    context['pygments_css'] = html_formatter.get_style_defs('.highlight')
+    return render(request, 'analyzer/diff_view.html', context)

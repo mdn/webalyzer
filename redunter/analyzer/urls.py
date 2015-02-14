@@ -11,5 +11,10 @@ urlpatterns = patterns('',
         views.source_view,
         name='source_view'
     ),
+    url(
+        r'^(?P<domain>[\w\.]+)/diff/(?P<id>\d+)/$',
+        views.diff_view,
+        name='diff_view'
+    ),
     url(r'^(?P<domain>[\w\.]+)$', views.analyzed, name='analyzed'),
 )

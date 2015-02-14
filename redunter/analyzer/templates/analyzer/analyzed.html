@@ -15,11 +15,6 @@ div.result {
   <h2 title="Was: {{ filesizeformat(total_before) }}, Could be {{ filesizeformat(total_after) }}">
     Potential Total Save:
     <b>{{ filesizeformat(total_before - total_after) }}</b></h2>
-  <!-- <h5>
-    Was <b>{{ filesizeformat(total_before) }}</b>
-    Could be <b>{{ filesizeformat(total_after) }}</b>
-  </h5> -->
-
 
   <h2>Results</h2>
   {% for result in results %}
@@ -32,17 +27,11 @@ div.result {
       {% endif %}
       <a href="{{ result.url }}">{{ result.url }}</a>
     </h5>
-    <input value="Diff" type="button" class="diffs">
-    <input value="Suspects" type="button" class="suspects">
-    <!-- <h5>Diff</h5> -->
+    <button type="button" class="diffs">Diff ({{ count_diff_lines(result.before, result.after) }})</button>
+    <button type="button" class="suspects">Suspects ({{ result.suspects.count() }})</button>
     <div class="diff" style="display:none">
       <pre>{{ diff_table(result.before, result.after) }}</pre>
-      {#
-      <pre style="display:none">{{ result.before }}</pre>
-      <pre style="display:none">{{ result.after }}</pre>
-      #}
     </div>
-    <!-- <h5>Suspects</h5> -->
 
     <div class="suspects" style="display:none">
       {% for suspect in result.suspects %}

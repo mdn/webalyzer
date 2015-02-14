@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block page_title %}Source view {{ result.url }}{% endblock %}
+{% block page_title %}Diff view {{ result.url }}{% endblock %}
 
 {% block extrahead %}
 <style>
@@ -17,10 +17,10 @@
 {% endblock %}
 
 {% block row %}
-  <h3>Source view for <a href="{{ result.url }}">{{ result.url }}</a></h3>
+  <h3>Diff view for <a href="{{ result.url }}">{{ result.url }}</a></h3>
   <h5>
-    <a href="{{ url('analyzer:diff_view', domain, result.id) }}">
-      Diff view for <b>{{ result.url }}</b>
+    <a href="{{ url('analyzer:source_view', domain, result.id) }}">
+      Source view for <b>{{ result.url }}</b>
     </a>
   </h5>
   <h5>
