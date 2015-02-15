@@ -1,0 +1,50 @@
+{% extends "analyzer/base.html" %}
+
+{% block extrahead %}
+<style>
+{{ pygments_css | safe }}
+div.result {
+  margin-bottom: 40px;
+}
+.highlighttable td {
+  padding: 1px 4px;
+}
+.highlight {
+  background-color: white;
+}
+.linenos pre {
+  color: #999;
+}
+</style>
+
+<base href="/analyzer">
+{% endblock %}
+
+
+{% block row %}
+<ng-view></ng-view>
+
+<script type="text/ng-template" id="start.html">
+{% include "analyzer/partials/start.html" %}
+</script>
+<script type="text/ng-template" id="analyzed.html">
+{% include "analyzer/partials/analyzed.html" %}
+</script>
+<script type="text/ng-template" id="diff_view.html">
+{% include "analyzer/partials/diff_view.html" %}
+</script>
+<script type="text/ng-template" id="source_view.html">
+{% include "analyzer/partials/source_view.html" %}
+</script>
+
+{% endblock %}
+
+{% block extrajs %}
+<script src="{{ static('analyzer/angular/angular.min.js') }}"></script>
+<script src="{{ static('analyzer/angular/angular-route.min.js') }}"></script>
+<script src="{{ static('analyzer/angular/angular-cookies.min.js') }}"></script>
+<script src="{{ static('analyzer/angular/angular-sanitize.min.js') }}"></script>
+<script src="{{ static('analyzer/js/app.js') }}"></script>
+<script src="{{ static('analyzer/js/controllers.js') }}"></script>
+<script src="{{ static('analyzer/js/services.js') }}"></script>
+{% endblock %}

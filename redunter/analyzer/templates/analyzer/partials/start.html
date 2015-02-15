@@ -1,0 +1,33 @@
+{% raw %}
+  <h1>Start analysis</h1>
+
+  <form method="post" ng-submit="startAnalysis()">
+    <input class="u-full-width" name="domain" ng-model="domain"
+    placeholder="mydomain.example.com" id="id_domain" type="text">
+    <button class="button-primary" type="submit">{{ loading_message }}</button>
+  </form>
+
+  <h3 ng-if="job_submitted">
+    <b>{{ job_submitted }}</b> submitted!<br>
+    {{ jobs_ahead }} jobs ahead in the queue.
+  </h3>
+  <h3 ng-if="job_submitted">
+    Your report will be available shortly. <br>
+    <a href="/analyzer/{{ domain }}">Report for <b>{{ domain }}</b></a>
+  </h3>
+
+  <p>
+    If you don't know your domain, you might not have submitted anything.<br>
+    See <a href="#">Help page</a>.
+  </p>
+
+  <p ng-if="recent_domains">
+    Here are some recent submissions:
+  </p>
+
+  <ul ng-repeat="domain in recent_domains">
+    <li><a href="/analyzer/{{ domain }}"><code>{{ domain }}</code></a>
+  </ul>
+
+
+{% endraw %}

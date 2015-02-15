@@ -91,3 +91,10 @@ ndg-httpsclient==0.3.2
 # sha256: xMQmSMaK_U4YJIY2XII6nNjnVXDWz0kJ1_CUgzP7PCA
 # sha256: 5PgdU8Uz9r2VJrBH8Ef3sQHCSrFzOcGnrY-YslwQHqs
 pyasn1==0.1.7
+# sha256: zMR9klCon4S2qqbQLTIJ-I1XYcEntrRqMkLiX7f2yP0
+# sha256: qzEpwYSny3zg1Z55Reek8p3nIeixc3odHtzNV7500kw
+alligator==0.9.0
+# sha256: pPs3sChg9rFhf2RpSHRx_Qht0tOLvOZAwgVYYrnEAZw
+redis==2.10.3
+# sha256: MVg9nhJ2eR2EqgFv3IeR_RhSisV5fbrhGLMOMuApDE8
+django-jsonview==0.4.3

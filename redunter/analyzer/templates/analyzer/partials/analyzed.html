@@ -1,0 +1,50 @@
+{% raw %}
+  <h1>Analysis for <code>{{ domain }}</code></h1>
+  <div ng-if="!results.length" class="alert alert-warning" role="alert" ng-cloak>
+    <p>Sorry no results are in yet :(</p>
+  </div>
+
+  <div ng-if="results.length" ng-cloak>
+    <h3>Number of collected pages: <b>{{ pages_count }}</b></h3>
+    <h3 title="Was: {{ filesizeformat(total_before) }}, Could be {{ filesizeformat(total_after) }}">
+      Potential Total Save:
+      <b>{{ (total_before - total_after) | filesize }}</b></h3>
+
+
+    <h2>Results</h2>
+    <div class="result" ng-repeat="result in results">
+      <h5>
+        <b ng-if="result.line">Inline CSS</b>
+        <b ng-if="!result.line">Linked CSS</b>
+        <a href="{{ result.url }}">{{ result.url }}</a>
+      </h5>
+      <button type="button" class="diffs"
+        ng-class="{'button-primary': result._show_diff}"
+        ng-click="showDiff(result)">Diff</button>
+      <button type="button" class="suspects"
+        ng-class="{'button-primary': result._show_suspects}"
+        ng-click="showSuspects(result)">Suspects ({{ result.suspects.length }})</button>
+      <div class="diff" ng-show="result._show_diff">
+        <pre>{{ result.unified_diff }}</pre>
+      </div>
+
+      <ul class="suspects" ng-show="result._show_suspects">
+        <li class="suspect" ng-repeat="suspect in result.suspects">
+          <code>{{ suspect.selector }}</code>
+            <a ng-if="suspect.line"
+            href="/analyzer/{{ domain }}/source/{{ result.id }}#L-{{ suspect.line }}"
+            title="line">#L-{{ suspect.line }}</a>
+          <!-- <small>{{ suspect.size | filesize }}</small> -->
+          <!-- <pre style="display:none">{{ suspect.selector_full }}</pre> -->
+          <!-- <pre>{{ suspect.style }}</pre> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+
+  <form method="post" ng-submit="restartAnalysis()">
+    <input name="domain" value="{{ domain }}" type="hidden">
+    <input class="button-primary" value="Re-submit for analysis" type="submit">
+  </form>
+{% endraw %}

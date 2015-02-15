@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'csp.middleware.CSPMiddleware',
+    #'csp.middleware.CSPMiddleware',
 )
 
 ROOT_URLCONF = 'redunter.urls'
@@ -111,37 +111,36 @@ TEMPLATE_LOADERS = (
 )
 
 # Django-CSP
-CSP_DEFAULT_SRC = (
-    "'self'",
-)
-CSP_FONT_SRC = (
-    "'self'",
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-    'http://fonts.gstatic.com',
-    'https://fonts.gstatic.com',
-)
-CSP_IMG_SRC = (
-    "'self'",
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-)
-CSP_SCRIPT_SRC = (
-    "'self'",
-    'http://www.mozilla.org',
-    'https://www.mozilla.org',
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-)
-CSP_STYLE_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-    'http://www.mozilla.org',
-    'https://www.mozilla.org',
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-    'http://fonts.googleapis.com',
-    'https://fonts.googleapis.com',
-)
+#CSP_DEFAULT_SRC = (
+#    "'self'",
+#)
+#CSP_FONT_SRC = (
+#    "'self'",
+#    'http://*.mozilla.net',
+#    'https://*.mozilla.net',
+#    'http://fonts.gstatic.com',
+#    'https://fonts.gstatic.com',
+#)
+#CSP_IMG_SRC = (
+#    "'self'",
+#    'http://*.mozilla.net',
+#    'https://*.mozilla.net',
+#)
+#CSP_SCRIPT_SRC = (
+#    "'self'",
+#)
+#CSP_STYLE_SRC = (
+#    "'self'",
+#    "'unsafe-inline'",
+#    'http://www.mozilla.org',
+#    'https://www.mozilla.org',
+#    'http://*.mozilla.net',
+#    'https://*.mozilla.net',
+#    'http://fonts.googleapis.com',
+#    'https://fonts.googleapis.com',
+#)
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+
+ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='redis://localhost:6379/1')
