@@ -1,6 +1,5 @@
-# sha256: cu3Ue1WudI0p8acdXKS4bnhcn7l0QHzyQrMWjm8bF34
-# sha256: 8ib7iqQ4RWlo1AP2c53hzy2tEo24b2buK0Hf6-NkXFs
-Django==1.7.3
+# sha256: LMlCgqKezqhWrN5DY9Ly-HFw8MMNlsf5U8XEbivKNno
+Django==1.8b1
 
 # sha256: JLo_Moq6CNjVBbwqj2ipTr4kqF6Eg2QLZnIhvA79Ox4
 psycopg2==2.5.4
@@ -21,8 +20,12 @@ django-csp==2.0.3
 # sha256: zIrr3sWl-5iZEvFX93s8IaXi8tpiOvkKe0drEGqDSr8
 # sha256: drxjpOLV5aDfd8p9GPD1bixGz7YrcRA7qSqSx5-rHgM
 nose==1.3.4
-# sha256: NmfSakH-wwNkoO9yWAgyylMogC1VP21ucq9awhyzY2U
-django-nose==1.3
+
+# sha256: Fe-WqPNOuOfMbg7SjqTVYTFf2b44ss4ceRszk5S_8_o
+https://github.com/django-nose/django-nose/archive/ae2c1bb.zip#egg=django-nose
+
+## sha256: NmfSakH-wwNkoO9yWAgyylMogC1VP21ucq9awhyzY2U
+#django-nose==1.3
 
 # sha256: yZzJcW1mVdnIvLHndjK4YVvwq9KC16vZ9cIUjK1_xmk
 # sha256: XuGkPM0HFtYGFSHuxpN8mD76AneTAT5XJxLE2lXHyD4
