@@ -43,11 +43,6 @@ ipython==2.3.1
 # sha256: ygF2j97N4TQwHzFwdDIm9g7f9cOTXxJDc3jr2RFQY1M
 dj-database-url==0.3.0
 
-# sha256: LiSsXQBNtXFJdqBKwOgMbfbkfpjDVMssDYL4h51Pj9s
-Jinja2==2.7.3
-
-# sha256: o71QUd0X6dUOip8tNiUI6C1wYwEP3AbV4HzjYI54D-Y
-jingo==0.7
 # sha256: X4aqvtTqlNkw3aYh6xlFgSNpcVACrt1OlVs6oLqKc8g
 # sha256: mWV1Iecfv6KfvMkmAF5UjPexfl2fxVXa05uPXs-8c_A
 # sha256: 9MtzwupJxQm6OvJNmtir7U6kLZgJs6guzTNxhkwl5F0
@@ -101,3 +96,6 @@ alligator==0.9.0
 redis==2.10.3
 # sha256: MVg9nhJ2eR2EqgFv3IeR_RhSisV5fbrhGLMOMuApDE8
 django-jsonview==0.4.3
+# sha256: tA777GxXkjVRMquS0OBIu9C7mdSOoxIcDdeIUE68oto
+# sha256: 7uktTqoNdirE5DwIsBuvIK1fthFbOQ06Dj60uDVb7yU
+django-pipeline==1.4.6

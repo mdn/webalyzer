@@ -1,4 +1,5 @@
 {% extends "analyzer/base.html" %}
+{% load pipeline %}
 
 {% block extrahead %}
 <style>
@@ -40,11 +41,5 @@ div.result {
 {% endblock %}
 
 {% block extrajs %}
-<script src="{{ static('analyzer/angular/angular.min.js') }}"></script>
-<script src="{{ static('analyzer/angular/angular-route.min.js') }}"></script>
-<script src="{{ static('analyzer/angular/angular-cookies.min.js') }}"></script>
-<script src="{{ static('analyzer/angular/angular-sanitize.min.js') }}"></script>
-<script src="{{ static('analyzer/js/app.js') }}"></script>
-<script src="{{ static('analyzer/js/controllers.js') }}"></script>
-<script src="{{ static('analyzer/js/services.js') }}"></script>
+{% javascript 'analyzer' %}
 {% endblock %}

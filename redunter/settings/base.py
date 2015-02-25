@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'django_nose',
+    'pipeline',
 
     # Django apps
     'django.contrib.admin',
@@ -72,6 +73,13 @@ ROOT_URLCONF = 'redunter.urls'
 
 WSGI_APPLICATION = 'redunter.wsgi.application'
 
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -105,7 +113,6 @@ MEDIA_URL = config('MEDIA_URL', '/media/')
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
 
 TEMPLATE_LOADERS = (
-    'jingo.Loader',
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 )
@@ -144,3 +151,29 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
 ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='redis://localhost:6379/1')
+
+
+PIPELINE_CSS = {
+    'skeleton': {
+        'source_filenames': (
+          'css/normalize.css',
+          'css/skeleton.css',
+        ),
+        'output_filename': 'js/skel.css'
+    }
+}
+
+PIPELINE_JS = {
+    'analyzer': {
+        'source_filenames': (
+            'analyzer/angular/angular.min.js',
+            'analyzer/angular/angular-route.min.js',
+            'analyzer/angular/angular-cookies.min.js',
+            'analyzer/angular/angular-sanitize.min.js',
+            'analyzer/js/app.js',
+            'analyzer/js/controllers.js',
+            'analyzer/js/services.js',
+        ),
+        'output_filename': 'js/analyzer.js',
+    }
+}

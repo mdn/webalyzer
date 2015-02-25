@@ -27,9 +27,19 @@ from django.utils.encoding import smart_unicode
 
 from redunter.collector.models import Page
 from redunter.analyzer.models import Result, Suspect
-from redunter.base.helpers import diff_table
+# from redunter.base.helpers import diff_table
 
 gator = Gator(settings.ALLIGATOR_CONN)
+
+
+def diff_table(before, after):
+    diff = difflib.unified_diff(
+        before.splitlines(),
+        after.splitlines(),
+        lineterm='',
+        fromfile='original', tofile='optimized'
+    )
+    return '\n'.join(diff)
 
 
 class ExtendedProcessor(Processor):
