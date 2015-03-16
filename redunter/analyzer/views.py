@@ -273,6 +273,8 @@ def analyzed(request, domain):
             'id': result.id,
             'url': result.url,
             'line': result.line,
+            'size_before': len(result.before),
+            'size_after': len(result.after),
             # 'before': result.before,
             # 'after': result.after,
             # 'diff': result.unified_diff,

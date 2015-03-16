@@ -6,7 +6,7 @@
 
   <div ng-if="results.length" ng-cloak>
     <h3>Number of collected pages: <b>{{ pages_count }}</b></h3>
-    <h3 title="Was: {{ filesizeformat(total_before) }}, Could be {{ filesizeformat(total_after) }}">
+    <h3 title="Was: {{ total_before | filesize }}, Could be {{ total_after | filesize }}">
       Potential Total Save:
       <b>{{ (total_before - total_after) | filesize }}</b></h3>
 
@@ -18,6 +18,10 @@
         <b ng-if="!result.line">Linked CSS</b>
         <a href="{{ result.url }}">{{ result.url }}</a>
       </h5>
+      <p>
+        Size before <b>{{ result.size_before | filesize }}</b>
+        Size after <b>{{ result.size_after | filesize }}</b>
+      </p>
       <button type="button" class="diffs"
         ng-class="{'button-primary': result._show_diff}"
         ng-click="showDiff(result)">Diff</button>
