@@ -6,7 +6,10 @@ import codecs
 import hashlib
 import stat
 import tempfile
+import subprocess
+import shutil
 from collections import OrderedDict
+from contextlib import contextmanager
 
 import requests
 from mincss.processor import Processor, DownloadError
@@ -17,6 +20,7 @@ from pygments.formatters import HtmlFormatter
 from alligator import Gator
 from jsonview.decorators import json_view
 
+from django import http
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
@@ -40,6 +44,34 @@ def diff_table(before, after):
         fromfile='original', tofile='optimized'
     )
     return '\n'.join(diff)
+
+
+@contextmanager
+def tmpfilename(content, extension=''):
+    filename = hashlib.md5(content.encode('utf-8')).hexdigest()
+    if extension:
+        filename += '.%s' % (extension,)
+    dir_ = tempfile.mkdtemp()
+    filepath = os.path.join(dir_, filename)
+    with open(filepath, 'w') as f:
+        f.write(content)
+    try:
+        yield filepath
+    finally:
+        shutil.rmtree(dir_)
+
+
+def prettify_css(css):
+    with tmpfilename(css, 'css') as filename:
+        process= subprocess.Popen(
+            ['crass', filename, '--pretty'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT
+        )
+        stdout, stderr = process.communicate()
+        if not stdout and stderr:
+            raise Exception(stderr)  # ???
+        return stdout
 
 
 class ExtendedProcessor(Processor):
@@ -269,6 +301,18 @@ def analyzed(request, domain):
                 'line': suspect.line,
                 'size': suspect.size,
             })
+        if result.url.endswith('min.css'):
+            prettified = True
+            diff = diff_table(
+                prettify_css(result.before),
+                prettify_css(result.after)
+            )
+        else:
+            prettified = False
+            diff = diff_table(result.before, result.after)
+        filename = None
+        if not result.line:
+            filename = os.path.basename(result.url)
         all_results.append({
             'id': result.id,
             'url': result.url,
@@ -278,10 +322,12 @@ def analyzed(request, domain):
             # 'before': result.before,
             # 'after': result.after,
             # 'diff': result.unified_diff,
-            'unified_diff': diff_table(result.before, result.after),
+            'unified_diff': diff,
             'ignored': result.ignored,
             'modified': result.modified,
             'suspects': suspects,
+            'prettified': prettified,
+            'filename': filename,
         })
 
     # all_pages = []
@@ -325,8 +371,7 @@ def source_view(request, domain, id):
 
 
 def diff_view(request, domain, id):
-    result = get_object_or_404(Result, id=id)
-    assert result.domain == domain, result.domain
+    result = get_object_or_404(Result, id=id, domain=domain)
     context = {}
 
     html_formatter = HtmlFormatter(
@@ -344,3 +389,25 @@ def diff_view(request, domain, id):
     context['result'] = result
     context['pygments_css'] = html_formatter.get_style_defs('.highlight')
     return render(request, 'analyzer/diff_view.html', context)
+
+
+def download(request, domain, id, which, filename):
+    result = get_object_or_404(Result, id=id, domain=domain)
+    assert filename.lower().endswith('.css'), filename
+
+    if which == 'before':
+        content = result.before
+    elif which == 'after':
+        content = result.after
+    else:
+        raise NotImplementedError(which)
+
+    if 'pretty' in request.GET:
+        content = prettify_css(content)
+    
+    response = http.HttpResponse(
+        content,
+        content_type='text/css; charset=utf-8'
+    )
+    response['Content-Disposition'] = 'inline; filename=%s' % (filename,)
+    return response

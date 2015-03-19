@@ -20,11 +20,26 @@
       </h5>
       <p>
         Size before <b>{{ result.size_before | filesize }}</b>
-        Size after <b>{{ result.size_after | filesize }}</b>
+        Size after <b>{{ result.size_after | filesize }}</b><br>
+        <span ng-show="!result.inline">
+          <b>Download</b>
+          <a href="/analyzer/{{ domain }}/download/{{ result.id }}/before/{{ result.filename }}">
+            original <small>({{ result.size_before | filesize }})</small></a>
+          <a href="/analyzer/{{ domain }}/download/{{ result.id }}/before/{{ result.filename }}?pretty"
+             ng-show="result.prettified">
+            original <small>(prettified)</small></a>
+
+          <a href="/analyzer/{{ domain }}/download/{{ result.id }}/after/{{ result.filename }}">
+            reduced <small>({{ result.size_after | filesize }})</small></a>
+          <a href="/analyzer/{{ domain }}/download/{{ result.id }}/after/{{ result.filename }}?pretty"
+            ng-show="result.prettified">
+            reduced <small>(prettified)</small></a>
+        </span>
       </p>
       <button type="button" class="diffs"
         ng-class="{'button-primary': result._show_diff}"
-        ng-click="showDiff(result)">Diff</button>
+        ng-click="showDiff(result)">
+        Diff <small ng-show="result.prettified">(prettified)</small></button>
       <button type="button" class="suspects"
         ng-class="{'button-primary': result._show_suspects}"
         ng-click="showSuspects(result)">Suspects ({{ result.suspects.length }})</button>

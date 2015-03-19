@@ -23,7 +23,12 @@ urlpatterns = patterns('',
         views.source_view,
         name='source_view_data'
     ),
-
+    url(
+        r'^(?P<domain>[\w\.]+)/download/(?P<id>\d+)/'
+        '(?P<which>before|after)/(?P<filename>.*?\.css)$',
+        views.download,
+        name='download'
+    ),
     # url(r'^$', views.analyze, name='analyze'),
     # url(r'^start/$', views.start, name='start'),
     # url(
