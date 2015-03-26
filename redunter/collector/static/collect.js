@@ -1,6 +1,5 @@
 !setTimeout(function() {
   function collect(callback) {
-    console.log("EXECUTING collect()");
     var html = document.documentElement.outerHTML;
     var data = new FormData();
     data.append('url', document.location.href);
@@ -71,4 +70,4 @@
     observer.observe(document.body, config);
   }
 
-}, 1.5 * 1000);
+}, 1.0 * 1000);

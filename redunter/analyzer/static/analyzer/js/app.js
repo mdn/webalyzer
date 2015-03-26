@@ -3,6 +3,7 @@ angular.module('app', [
   'ngSanitize',
   'ui.router',
   'controllers',
+  'services',
 ])
 
 .config(['$stateProvider', '$locationProvider',
@@ -24,7 +25,7 @@ angular.module('app', [
       controller: 'AnalyzedController'
   })
   .state('sourceview', {
-      url: '/:domain/source/:id',
+      url: '/:domain/source/:id/',
       templateUrl: 'source_view.html',
       controller: 'SourceViewController'
   })

@@ -1,4 +1,4 @@
-angular.module('controllers', [])
+angular.module('controllers', ['services'])
 
 .filter( 'filesize', function () {
      var units = [
@@ -26,13 +26,32 @@ angular.module('controllers', [])
      };
 })
 
+.directive('bindHtmlUnsafe', function( $compile ) {
+    return function( $scope, $element, $attrs ) {
+
+        var compile = function( newHTML ) { // Create re-useable compile function
+            newHTML = $compile(newHTML)($scope); // Compile html
+            $element.html('').append(newHTML); // Clear and append it
+        };
+
+        var htmlName = $attrs.bindHtmlUnsafe; // Get the name of the variable
+                                              // Where the HTML is stored
+
+        $scope.$watch(htmlName, function( newHTML ) { // Watch for changes to
+                                                      // the HTML
+            if(!newHTML) return;
+            compile(newHTML);   // Compile it
+        });
+
+    };
+})
+
 .controller('StartController', ['$scope', '$http',
 function($scope, $http) {
   document.title = 'Start';
   var initial_loading_message = "Start analysis";
   $scope.loading_message = initial_loading_message;
   $scope.startAnalysis = function() {
-      console.log($scope.domain);
       $scope.job_submitted = null;
       if ($scope.domain.trim()) {
         $http.post('/analyzer/submit/', {domain: $scope.domain})
@@ -55,50 +74,57 @@ function($scope, $http) {
   });
 }])
 
-.controller('AnalyzedController', ['$scope', '$http', '$stateParams',
-function($scope, $http, $stateParams) {
-  $scope.domain = $stateParams.domain;
-  document.title = 'Analysis for ' + $scope.domain;
-  $http.get('/analyzer/' + $scope.domain + '/data')
-  .success(function(response) {
-    console.log(response);
-    $scope.results = response.results;
-    $scope.pages_count = response.pages_count;
-    $scope.total_before = response.total_before;
-    $scope.total_after = response.total_after;
-  })
-  .error(function() {
-    $scope.error = arguments;
-    console.error(arguments);
-  });
+.controller('AnalyzedController', [
+  '$scope', '$http', '$stateParams', 'lineLight',
+  function($scope, $http, $stateParams, lineLight) {
+    $scope.domain = $stateParams.domain;
+    document.title = 'Analysis for ' + $scope.domain;
+    $http.get('/analyzer/' + $scope.domain + '/data')
+    .success(function(response) {
+      // console.log(response);
+      $scope.results = response.results;
+      $scope.pages_count = response.pages_count;
+      $scope.total_before = response.total_before;
+      $scope.total_after = response.total_after;
+    })
+    .error(function() {
+      $scope.error = arguments;
+      console.error(arguments);
+    });
 
-  $scope.showDiff = function(result) {
-    result._show_diff = !result._show_diff;
-  };
-  $scope.showSuspects = function(result) {
-    result._show_suspects = !result._show_suspects;
-  };
+    $scope.showDiff = function(result) {
+      result._show_diff = !result._show_diff;
+    };
+    $scope.showSuspects = function(result) {
+      result._show_suspects = !result._show_suspects;
+    };
+    $scope.setSourceViewLine = function(line) {
+      lineLight.store(line);
+    };
+  }]
+)
 
-}])
-
-.controller('SourceViewController', ['$scope', '$http', '$stateParams',
-function($scope, $http, $stateParams) {
-  $scope.domain = $stateParams.domain;
-  $scope.id = $stateParams.id;
-  document.title = 'Source view for ' + $scope.domain;
-  $scope.loading = true;
-  $http.get('/analyzer/' + $scope.domain + '/source/' + $scope.id + '/data')
-  .success(function(response) {
-    $scope.code = response.code;
-    $scope.result = response.result;
-  })
-  .error(function() {
-    console.error(arguments);
-  })
-  .finally(function() {
-    $scope.loading = false;
-  });
-}])
+.controller('SourceViewController', [
+  '$scope', '$http', '$stateParams', 'lineLight',
+  function($scope, $http, $stateParams, lineLight) {
+    $scope.domain = $stateParams.domain;
+    $scope.id = $stateParams.id;
+    document.title = 'Source view for ' + $scope.domain;
+    $scope.loading = true;
+    $http.get('/analyzer/' + $scope.domain + '/source/' + $scope.id + '/data')
+    .success(function(response) {
+      $scope.code = response.code;
+      $scope.result = response.result;
+      lineLight.highlight();
+    })
+    .error(function() {
+      console.error(arguments);
+    })
+    .finally(function() {
+      $scope.loading = false;
+    });
+  }
+])
 
 .controller('DiffViewController', ['$scope', '$http', '$stateParams',
 function($scope, $http, $stateParams) {

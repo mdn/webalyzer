@@ -55,7 +55,8 @@
         <li class="suspect" ng-repeat="suspect in result.suspects">
           <code>{{ suspect.selector }}</code>
             <a ng-if="suspect.line"
-            href="/analyzer/{{ domain }}/source/{{ result.id }}#L-{{ suspect.line }}"
+            ui-sref="sourceview({domain: domain, id: result.id})"
+            ng-click="setSourceViewLine(suspect.line)"
             title="line">#L-{{ suspect.line }}</a>
           <!-- <small>{{ suspect.size | filesize }}</small> -->
           <!-- <pre style="display:none">{{ suspect.selector_full }}</pre> -->

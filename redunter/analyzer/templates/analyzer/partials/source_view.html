@@ -17,6 +17,7 @@
         Back to analysis for <code>{{ domain }}</code>
       </a>
     </h5>
-    <div ng-bind-html="code"></div>
+    <!-- <div ng-bind-html="code"></div> -->
+    <div bind-html-unsafe="code"></div>
   </div>
 {% endverbatim %}
