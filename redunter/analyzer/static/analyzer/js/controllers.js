@@ -55,9 +55,9 @@ function($scope, $http) {
   });
 }])
 
-.controller('AnalyzedController', ['$scope', '$http', '$routeParams',
-function($scope, $http, $routeParams) {
-  $scope.domain = $routeParams.domain;
+.controller('AnalyzedController', ['$scope', '$http', '$stateParams',
+function($scope, $http, $stateParams) {
+  $scope.domain = $stateParams.domain;
   document.title = 'Analysis for ' + $scope.domain;
   $http.get('/analyzer/' + $scope.domain + '/data')
   .success(function(response) {
@@ -81,10 +81,10 @@ function($scope, $http, $routeParams) {
 
 }])
 
-.controller('SourceViewController', ['$scope', '$http', '$routeParams',
-function($scope, $http, $routeParams) {
-  $scope.domain = $routeParams.domain;
-  $scope.id = $routeParams.id;
+.controller('SourceViewController', ['$scope', '$http', '$stateParams',
+function($scope, $http, $stateParams) {
+  $scope.domain = $stateParams.domain;
+  $scope.id = $stateParams.id;
   document.title = 'Source view for ' + $scope.domain;
   $scope.loading = true;
   $http.get('/analyzer/' + $scope.domain + '/source/' + $scope.id + '/data')
@@ -100,10 +100,10 @@ function($scope, $http, $routeParams) {
   });
 }])
 
-.controller('DiffViewController', ['$scope', '$http', '$routeParams',
-function($scope, $http, $routeParams) {
-  $scope.domain = $routeParams.domain;
-  $scope.id = $routeParams.id;
+.controller('DiffViewController', ['$scope', '$http', '$stateParams',
+function($scope, $http, $stateParams) {
+  $scope.domain = $stateParams.domain;
+  $scope.id = $stateParams.id;
   document.title = 'Diff view for ' + $scope.domain;
 }])
 

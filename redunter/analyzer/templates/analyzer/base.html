@@ -22,11 +22,22 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   {% stylesheet 'skeleton' %}
+  {% stylesheet 'loaders' %}
   <style>
   body {
     font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: none;
   }
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 20em;
+  }
+  .ball-scale-multiple > div {
+    background-color: #666;
+  }
+  .loader
   </style>
 
   <!-- Favicon

@@ -268,6 +268,8 @@ def get_selectors(csstext, href=None):
 
 @json_view
 def analyzed(request, domain):
+    # from time import sleep
+    # sleep(3)
     results = Result.objects.filter(domain=domain)
     if not results.count():
         return {'count': 0}
@@ -404,7 +406,7 @@ def download(request, domain, id, which, filename):
 
     if 'pretty' in request.GET:
         content = prettify_css(content)
-    
+
     response = http.HttpResponse(
         content,
         content_type='text/css; charset=utf-8'

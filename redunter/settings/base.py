@@ -160,16 +160,22 @@ PIPELINE_CSS = {
           'css/skeleton.css',
         ),
         'output_filename': 'js/skel.css'
-    }
+    },
+    'loaders': {
+        'source_filenames': (
+            'analyzer/css/loaders.min.css',
+        ),
+        'output_filename': 'css/loaders.css'
+    },
 }
 
 PIPELINE_JS = {
     'analyzer': {
         'source_filenames': (
             'analyzer/angular/angular.min.js',
-            'analyzer/angular/angular-route.min.js',
             'analyzer/angular/angular-cookies.min.js',
             'analyzer/angular/angular-sanitize.min.js',
+            'analyzer/angular/angular-ui-router.min.js',
             'analyzer/js/app.js',
             'analyzer/js/controllers.js',
             'analyzer/js/services.js',
