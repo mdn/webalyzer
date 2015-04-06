@@ -1,5 +1,5 @@
 """
-Django settings for redunter project.
+Django settings for webalyzer project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -37,9 +37,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 INSTALLED_APPS = [
     # Project specific apps
-    'redunter.base',
-    'redunter.collector',
-    'redunter.analyzer',
+    'webalyzer.base',
+    'webalyzer.collector',
+    'webalyzer.analyzer',
 
     # Third party apps
     'django_nose',
@@ -69,9 +69,9 @@ MIDDLEWARE_CLASSES = (
     #'csp.middleware.CSPMiddleware',
 )
 
-ROOT_URLCONF = 'redunter.urls'
+ROOT_URLCONF = 'webalyzer.urls'
 
-WSGI_APPLICATION = 'redunter.wsgi.application'
+WSGI_APPLICATION = 'webalyzer.wsgi.application'
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 

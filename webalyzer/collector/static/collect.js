@@ -13,7 +13,7 @@
       console.warn("Unable to XHR");
       return;
     }
-    req.open('POST', 'https://redunter.dev/collector/', true);
+    req.open('POST', 'https://webalyzer.dev/collector/', true);
     req.onreadystatechange = function (response) {
       if (req.readyState === 4) {
         if (req.status === 200) {

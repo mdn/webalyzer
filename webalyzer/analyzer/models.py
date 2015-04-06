@@ -1,6 +1,6 @@
 from django.db import models
 
-from redunter.collector.models import Page
+from webalyzer.collector.models import Page
 
 
 class Result(models.Model):

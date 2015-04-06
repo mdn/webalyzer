@@ -1,5 +1,5 @@
 [run]
-source = redunter
+source = webalyzer
 
 [report]
 omit = */migrations/*

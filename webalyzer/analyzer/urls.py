@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from redunter.analyzer import views
+from webalyzer.analyzer import views
 
 
 urlpatterns = patterns('',

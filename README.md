@@ -1,8 +1,27 @@
-Redunter - Hunting for unused CSS
-=================================
+Webalyzer - Collects web code for analysis and reporting
+========================================================
 
-You need to have installed [crass](https://github.com/mattbasta/crass)
-so that `crass` is available on the command line. It's used to
-prettify CSS.
+Webalyzer helps you collect HTML from live web pages and run analysis
+on the the HTML in batches for reporting purposes.
 
-    npm install -g crass
+
+Requirements
+------------
+
+Everything in the `requirements.txt` file:
+
+        pip install -r requirements.txt
+
+Ideally you should use [`peep`](https://pypi.python.org/pypi/peep) to
+assure you don't install anything that hasn't been vetted for:
+
+        pip install peep
+        peep install -r requirements.txt
+
+
+For the CSS parsing you need the [crass](https://github.com/mattbasta/crass) nodejs module installed
+and made available on the `PATH`:
+
+        npm install -g crass
+
+        
