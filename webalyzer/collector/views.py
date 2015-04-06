@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django import http
 from django.views.decorators.csrf import csrf_exempt
 
-from redunter.collector.models import Page
+from webalyzer.collector.models import Page
 
 @csrf_exempt
 def collect(request):

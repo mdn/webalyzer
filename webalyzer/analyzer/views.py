@@ -29,9 +29,9 @@ from django.db import transaction
 from django.core.cache import cache
 from django.utils.encoding import smart_unicode
 
-from redunter.collector.models import Page
-from redunter.analyzer.models import Result, Suspect
-# from redunter.base.helpers import diff_table
+from webalyzer.collector.models import Page
+from webalyzer.analyzer.models import Result, Suspect
+# from webalyzer.base.helpers import diff_table
 
 gator = Gator(settings.ALLIGATOR_CONN)
 

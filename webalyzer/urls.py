@@ -6,10 +6,10 @@ from django.conf import settings
 urlpatterns = patterns('',
     url(
         r'collector/',
-        include('redunter.collector.urls', namespace='collector')
+        include('webalyzer.collector.urls', namespace='collector')
     ),
     url(
         r'analyzer/',
-        include('redunter.analyzer.urls', namespace='analyzer')
+        include('webalyzer.analyzer.urls', namespace='analyzer')
     ),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
