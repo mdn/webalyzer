@@ -1,5 +1,6 @@
-# sha256: LMlCgqKezqhWrN5DY9Ly-HFw8MMNlsf5U8XEbivKNno
-Django==1.8b1
+# sha256: agPOL-r90ZOguoom29l3PnV9Ll1eeTOmLqwSmBO9OBo
+# sha256: BmutQstMZpROfvz3ME09F_ew6yIuU5WM3YZkINLotBI
+Django==1.8
 
 # sha256: JLo_Moq6CNjVBbwqj2ipTr4kqF6Eg2QLZnIhvA79Ox4
 psycopg2==2.5.4
