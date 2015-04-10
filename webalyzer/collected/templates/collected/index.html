@@ -1,5 +1,7 @@
-{% extends "analyzer/base.html" %}
+{% extends "collected/base.html" %}
 {% load pipeline %}
+
+{% block page_title %}Collected pages{% endblock %}
 
 {% block extrahead %}
 <style>
@@ -9,19 +11,13 @@ div.result {
 }
 .highlighttable td {
   padding: 1px 4px;
-}/*
-.highlight {
-  background-color: white;
 }
-.linenos pre {
-  color: #999;
-}*/
 .highlit-line {
   background-color: #fffa9e;
 }
 </style>
 
-<base href="/analyzer/">
+<base href="/collected/">
 {% endblock %}
 
 
@@ -29,13 +25,10 @@ div.result {
 <ui-view></ui-view>
 
 <script type="text/ng-template" id="start.html">
-{% include "analyzer/partials/start.html" %}
+{% include "collected/partials/start.html" %}
 </script>
-<script type="text/ng-template" id="analyzed.html">
-{% include "analyzer/partials/analyzed.html" %}
-</script>
-<script type="text/ng-template" id="diff_view.html">
-{% include "analyzer/partials/diff_view.html" %}
+<script type="text/ng-template" id="collected.html">
+{% include "collected/partials/collected.html" %}
 </script>
 <script type="text/ng-template" id="source_view.html">
 {% include "analyzer/partials/source_view.html" %}
@@ -45,5 +38,5 @@ div.result {
 
 {% block extrajs %}
 {% javascript 'angular' %}
-{% javascript 'analyzer' %}
+{% javascript 'collected' %}
 {% endblock %}

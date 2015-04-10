@@ -1,0 +1,23 @@
+{% verbatim %}
+  <h1>Analysis for <code>{{ domain }}</code></h1>
+
+  <p ng-if="loading">
+    Loading source...
+  </p>
+
+  <div ng-if="!loading">
+    <h3>Source view for <a href="{{ result.url }}">{{ result.url }}</a></h3>
+    <h5>
+      <a href="/analyzer/{{ domain }}/diff/{{ result.id }}">
+        Diff view for <b>{{ result.url }}</b>
+      </a>
+    </h5>
+    <h5>
+      <a href="/analyzer/{{ domain }}">
+        Back to analysis for <code>{{ domain }}</code>
+      </a>
+    </h5>
+    <!-- <div ng-bind-html="code"></div> -->
+    <div bind-html-unsafe="code"></div>
+  </div>
+{% endverbatim %}

@@ -1,0 +1,15 @@
+{% verbatim %}
+  <h3>Diff view for <a href="{{ result.url }}">{{ result.url }}</a></h3>
+  <h5>
+    <a href="/analyzer/{{ domain }}/source/{{ result.id }}">
+      Source view for <b>{{ result.url }}</b>
+    </a>
+  </h5>
+  <h5>
+    <a href="/analyzer/{{ domain}}">
+      Back to analysis for <code>{{ domain }}</code>
+    </a>
+  </h5>
+
+{{ code }}
+{% endverbatim %}
