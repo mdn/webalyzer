@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django import http
 from django.views.decorators.csrf import csrf_exempt
 
-from webalyzer.collector.models import Page
+from webalyzer.collector.models import Page, Stylesheet
 
 @csrf_exempt
 def collect(request):
@@ -15,25 +15,50 @@ def collect(request):
         return response
 
     url = request.POST['url']
-    html = request.POST['html']
-    domain = urlparse(url).netloc
-    print (url, domain)
+    domain = request.POST.get('domain', urlparse(url).netloc)
+    # print (url, domain)
 
-    for page in Page.objects.filter(url=url, domain=domain):
-        if page.html == html:
-            created = False
-            break
+    if request.POST.get('css'):
+        # it's a stylesheet!
+        css = request.POST['css']
+        for page in Stylesheet.objects.filter(url=url, domain=domain):
+            if page.css == css:
+                created = False
+                break
+        else:
+            page = Stylesheet.objects.create(
+                url=url,
+                domain=domain,
+                css=css,
+            )
+            created = True
+
+        if created:
+            print "New CSS", domain, url
+            print len(page), "bytes"
+        else:
+            print "Not new CSS", domain, url
+
     else:
-        page = Page.objects.create(
-            url=url,
-            domain=domain,
-            html=html,
-            size=len(html),
-        )
-        created = True
+        html = request.POST['html']
+        for page in Page.objects.filter(url=url, domain=domain):
+            if page.html == html:
+                created = False
+                break
+        else:
+            page = Page.objects.create(
+                url=url,
+                domain=domain,
+                html=html,
+            )
+            created = True
 
-    print "Created?", created
-    print len(page.html), "bytes of HTML"
+        if created:
+            print "New HTML", domain, url
+            print len(page), "bytes"
+        else:
+            print "Not new HTML", domain, url
+
     response = http.HttpResponse(
         'OK', status=created and 201 or 200)
     response['Access-Control-Allow-Origin'] = '*'
