@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'webalyzer.base',
     'webalyzer.collector',
     'webalyzer.analyzer',
+    'webalyzer.collected',
 
     # Third party apps
     'django_nose',
     'pipeline',
+    'sorl.thumbnail',
 
     # Django apps
     'django.contrib.admin',
@@ -170,16 +172,29 @@ PIPELINE_CSS = {
 }
 
 PIPELINE_JS = {
-    'analyzer': {
+    'angular': {
         'source_filenames': (
             'analyzer/angular/angular.min.js',
             'analyzer/angular/angular-cookies.min.js',
             'analyzer/angular/angular-sanitize.min.js',
             'analyzer/angular/angular-ui-router.min.js',
+        ),
+        'output_filename': 'js/angular.js',
+    },
+    'analyzer': {
+        'source_filenames': (
             'analyzer/js/app.js',
             'analyzer/js/controllers.js',
             'analyzer/js/services.js',
         ),
         'output_filename': 'js/analyzer.js',
-    }
+    },
+    'collected': {
+        'source_filenames': (
+            'collected/js/app.js',
+            'collected/js/controllers.js',
+            'collected/js/services.js',
+        ),
+        'output_filename': 'js/collected.js',
+    },
 }

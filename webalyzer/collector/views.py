@@ -24,7 +24,12 @@ def collect(request):
             created = False
             break
     else:
-        page = Page.objects.create(url=url, domain=domain, html=html)
+        page = Page.objects.create(
+            url=url,
+            domain=domain,
+            html=html,
+            size=len(html),
+        )
         created = True
 
     print "Created?", created

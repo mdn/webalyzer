@@ -9,6 +9,10 @@ urlpatterns = patterns('',
         include('webalyzer.collector.urls', namespace='collector')
     ),
     url(
+        r'collected/',
+        include('webalyzer.collected.urls', namespace='collected')
+    ),
+    url(
         r'analyzer/',
         include('webalyzer.analyzer.urls', namespace='analyzer')
     ),

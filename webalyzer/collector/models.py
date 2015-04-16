@@ -1,9 +1,12 @@
 from django.db import models
 
+
 class Page(models.Model):
     domain = models.CharField(max_length=100, db_index=True)
     url = models.URLField()
     html = models.TextField()
+    size = models.PositiveIntegerField(default=0)
+    title = models.TextField(null=True)
     added = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

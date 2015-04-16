@@ -1,0 +1,74 @@
+{% verbatim %}
+  <h1>Analysis for <code>{{ domain }}</code></h1>
+
+
+  <div ng-if="!results.length" class="loading" role="alert" ng-cloak>
+    <h3>Loading results</h3>
+    <div class="loader">
+      <div class="loader-inner ball-scale-multiple"><div></div><div></div><div></div></div></div>
+  </div>
+
+  <div ng-if="results.length" ng-cloak>
+    <h3>Number of collected pages: <b>{{ pages_count }}</b></h3>
+    <h3 title="Was: {{ total_before | filesize }}, Could be {{ total_after | filesize }}">
+      Potential Total Save:
+      <b>{{ (total_before - total_after) | filesize }}</b></h3>
+
+
+    <h2>Results</h2>
+    <div class="result" ng-repeat="result in results">
+      <h5>
+        <b ng-if="result.line">Inline CSS</b>
+        <b ng-if="!result.line">Linked CSS</b>
+        <a href="{{ result.url }}">{{ result.url }}</a>
+      </h5>
+      <p>
+        Size before <b>{{ result.size_before | filesize }}</b>
+        Size after <b>{{ result.size_after | filesize }}</b><br>
+        <span ng-show="!result.inline">
+          <b>Download</b>
+          <a target="_self" href="/analyzer/{{ domain }}/download/{{ result.id }}/before/{{ result.filename }}">
+            original <small>({{ result.size_before | filesize }})</small></a>
+          <a target="_self" href="/analyzer/{{ domain }}/download/{{ result.id }}/before/{{ result.filename }}?pretty"
+             ng-show="result.prettified">
+            original <small>(prettified)</small></a>
+
+          <a target="_self" href="/analyzer/{{ domain }}/download/{{ result.id }}/after/{{ result.filename }}">
+            reduced <small>({{ result.size_after | filesize }})</small></a>
+          <a target="_self" href="/analyzer/{{ domain }}/download/{{ result.id }}/after/{{ result.filename }}?pretty"
+            ng-show="result.prettified">
+            reduced <small>(prettified)</small></a>
+        </span>
+      </p>
+      <button type="button" class="diffs"
+        ng-class="{'button-primary': result._show_diff}"
+        ng-click="showDiff(result)">
+        Diff <small ng-show="result.prettified">(prettified)</small></button>
+      <button type="button" class="suspects"
+        ng-class="{'button-primary': result._show_suspects}"
+        ng-click="showSuspects(result)">Suspects ({{ result.suspects.length }})</button>
+      <div class="diff" ng-show="result._show_diff">
+        <pre>{{ result.unified_diff }}</pre>
+      </div>
+
+      <ul class="suspects" ng-show="result._show_suspects">
+        <li class="suspect" ng-repeat="suspect in result.suspects">
+          <code>{{ suspect.selector }}</code>
+            <a ng-if="suspect.line"
+            ui-sref="sourceview({domain: domain, id: result.id})"
+            ng-click="setSourceViewLine(suspect.line)"
+            title="line">#L-{{ suspect.line }}</a>
+          <!-- <small>{{ suspect.size | filesize }}</small> -->
+          <!-- <pre style="display:none">{{ suspect.selector_full }}</pre> -->
+          <!-- <pre>{{ suspect.style }}</pre> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+
+  <form method="post" ng-submit="restartAnalysis()">
+    <input name="domain" value="{{ domain }}" type="hidden">
+    <input class="button-primary" value="Re-submit for analysis" type="submit">
+  </form>
+{% endverbatim %}

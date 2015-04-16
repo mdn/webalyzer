@@ -1,0 +1,33 @@
+{% verbatim %}
+  <h1>Pages collected for <code>{{ domain }}</code></h1>
+
+  <div ng-if="loading" class="loading" role="alert" ng-cloak>
+    <h3>Loading results</h3>
+    <div class="loader">
+      <div class="loader-inner ball-scale-multiple"><div></div><div></div><div></div></div></div>
+  </div>
+
+  <div ng-if="!loading" ng-cloak>
+    <h3>Number of collected pages: <b>{{ pages_count }}</b></h3>
+    <h3>Total size of collected pages: <b>{{ total_html_size | filesize }}</b></h3>
+  </div>
+  <hr>
+
+  <h4>Browse collected HTML</h4>
+
+  <!-- inline styles are great for local hacking/debuggin -->
+  <div class="page" ng-repeat="page in pages"
+  style="clear:left; overflow-y: hidden; margin-bottom:10px; border-bottom: 1px solid #ccc">
+    <a ng-href="{{ imageSrc(page) }}" target="_self">
+      <img style="float:left" ng-src="{{ thumbnailSrc(page, '150x150') }}" width="150" alt="Thumbnail">
+    </a>
+    <p style="margin-left: 180px">
+      <b>URL:</b>
+      <a ng-href="page.url">{{ page.url }}</a><br>
+      <b>Title:</b> <code>{{ page.title }}</code><br>
+      <b>Size:</b> {{ page.size | filesize }}<br>
+      <b>Last added:</b> {{ page.modified }}<br>
+    </p>
+  </div>
+
+{% endverbatim %}

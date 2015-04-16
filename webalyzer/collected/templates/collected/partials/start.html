@@ -1,0 +1,18 @@
+{% verbatim %}
+  <h1>Collected Domains</h1>
+
+  <p ng-if="recent_domains">
+    Here are some recent submissions:
+  </p>
+
+  <ul ng-repeat="domain in recent_domains">
+    <li><a ui-sref="collected({domain: domain})"><code>{{ domain }}</code></a>
+  </ul>
+
+  <hr>
+  <p>
+    <b>Note!</b>
+    This'll be replaced with a list of domains based in your auth.
+  </p>
+
+{% endverbatim %}
