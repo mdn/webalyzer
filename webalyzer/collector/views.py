@@ -1,11 +1,10 @@
-import json
 from urlparse import urlparse
 
-from django.shortcuts import render
 from django import http
 from django.views.decorators.csrf import csrf_exempt
 
 from webalyzer.collector.models import Page, Stylesheet
+
 
 @csrf_exempt
 def collect(request):

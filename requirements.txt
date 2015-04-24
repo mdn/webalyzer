@@ -141,3 +141,6 @@ sorl-thumbnail==12.2
 # sha256: EgP74zfVbifDYCQ-w29QVP_O1HP2bEzyaSTNIPnSJbg
 # sha256: Q2O1JSfCY-d_WxjD3__RWuRU7fDERXGX7L4phjplGTg
 Pillow==2.8.1
+# sha256: SqEp342QB7GSv4IBP0FVM5lGUtfKqTDQAmh-tCpsKkE
+# sha256: uLfjVjC1U54moZffxgBb6eHpoTVJazd3I6jrwBuby_8
+pep8==1.6.2

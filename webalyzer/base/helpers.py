@@ -1,8 +1,6 @@
-import time
 import difflib
 
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.utils.safestring import mark_safe
 from django.template.defaultfilters import filesizeformat
 from jingo import register
 

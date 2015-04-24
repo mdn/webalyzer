@@ -24,7 +24,7 @@ from django import http
 from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
-from django.db.models import Sum, Max
+from django.db.models import Max
 from django.db import transaction
 from django.core.cache import cache
 from django.utils.encoding import smart_unicode
@@ -63,7 +63,7 @@ def tmpfilename(content, extension=''):
 
 def prettify_css(css):
     with tmpfilename(css, 'css') as filename:
-        process= subprocess.Popen(
+        process = subprocess.Popen(
             ['crass', filename, '--pretty'],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT
@@ -146,7 +146,6 @@ def recent_submissions(request):
 @json_view
 @transaction.atomic
 def submit(request):
-    context = {}
     if request.method != 'POST':  # required_P
         return redirect(reverse('analyzer:start'))
 
@@ -332,20 +331,11 @@ def analyzed(request, domain):
             'filename': filename,
         })
 
-    # all_pages = []
-    # for page in pages:
-    #     all_pages.append({
-    #         'domain': page.domain,
-    #         'url': page.url,
-    #         'html':
-    #     })
-
     context['domain'] = domain
     context['results'] = all_results
     context['pages_count'] = pages.count()
-    # print context
     return context
-    # return render(request, 'analyzer/analyzed.html', context)
+
 
 @json_view
 def source_view(request, domain, id):

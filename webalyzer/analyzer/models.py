@@ -1,7 +1,5 @@
 from django.db import models
 
-from webalyzer.collector.models import Page
-
 
 class Result(models.Model):
     domain = models.CharField(max_length=100, db_index=True)

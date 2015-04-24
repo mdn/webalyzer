@@ -3,7 +3,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(
         r'collector/',
         include('webalyzer.collector.urls', namespace='collector')

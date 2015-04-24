@@ -13,7 +13,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'webalyzer.settings')
 from django.conf import settings
 from django.core.wsgi import get_wsgi_application
 
-#import newrelic
 from decouple import config
 from whitenoise.django import DjangoWhiteNoise
 
@@ -28,5 +27,6 @@ if settings.MEDIA_ROOT and settings.MEDIA_URL:
 newrelic_ini = config('NEW_RELIC_CONFIG_FILE', default='newrelic.ini')
 newrelic_license_key = config('NEW_RELIC_LICENSE_KEY', default=None)
 if newrelic_ini and newrelic_license_key:
+    import newrelic
     newrelic.agent.initialize(newrelic_ini)
     application = newrelic.agent.wsgi_application()(application)

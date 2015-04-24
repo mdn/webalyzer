@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'csp.middleware.CSPMiddleware',
+    # 'csp.middleware.CSPMiddleware',
 )
 
 ROOT_URLCONF = 'webalyzer.urls'
@@ -112,7 +112,9 @@ STATIC_URL = config('STATIC_URL', '/static/')
 MEDIA_ROOT = config('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = config('MEDIA_URL', '/media/')
 
-SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
+SESSION_COOKIE_SECURE = config(
+    'SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool
+)
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -120,25 +122,25 @@ TEMPLATE_LOADERS = (
 )
 
 # Django-CSP
-#CSP_DEFAULT_SRC = (
+# CSP_DEFAULT_SRC = (
 #    "'self'",
-#)
-#CSP_FONT_SRC = (
+# )
+# CSP_FONT_SRC = (
 #    "'self'",
 #    'http://*.mozilla.net',
 #    'https://*.mozilla.net',
 #    'http://fonts.gstatic.com',
 #    'https://fonts.gstatic.com',
-#)
-#CSP_IMG_SRC = (
+# )
+# CSP_IMG_SRC = (
 #    "'self'",
 #    'http://*.mozilla.net',
 #    'https://*.mozilla.net',
-#)
-#CSP_SCRIPT_SRC = (
+# )
+# CSP_SCRIPT_SRC = (
 #    "'self'",
-#)
-#CSP_STYLE_SRC = (
+# )
+# CSP_STYLE_SRC = (
 #    "'self'",
 #    "'unsafe-inline'",
 #    'http://www.mozilla.org',
@@ -147,7 +149,7 @@ TEMPLATE_LOADERS = (
 #    'https://*.mozilla.net',
 #    'http://fonts.googleapis.com',
 #    'https://fonts.googleapis.com',
-#)
+# )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
@@ -158,8 +160,8 @@ ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='redis://localhost:6379/1')
 PIPELINE_CSS = {
     'skeleton': {
         'source_filenames': (
-          'css/normalize.css',
-          'css/skeleton.css',
+            'css/normalize.css',
+            'css/skeleton.css',
         ),
         'output_filename': 'js/skel.css'
     },

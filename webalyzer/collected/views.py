@@ -1,23 +1,11 @@
 import os
-import json
 import time
-import difflib
-import codecs
-import hashlib
-import stat
 import tempfile
 import subprocess
 import shutil
 import urlparse
-from collections import OrderedDict
 from contextlib import contextmanager
 
-import requests
-from mincss.processor import Processor, DownloadError
-import cssutils
-from pygments import highlight
-from pygments.lexers import CssLexer, DiffLexer
-from pygments.formatters import HtmlFormatter
 from alligator import Gator
 from jsonview.decorators import json_view
 from lxml import etree
@@ -26,18 +14,14 @@ from sorl.thumbnail import get_thumbnail
 
 from django import http
 from django.conf import settings
-from django.shortcuts import render, redirect, get_object_or_404
-from django.core.urlresolvers import reverse
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum, Max
-from django.db import transaction
 from django.core.cache import cache
-from django.utils.encoding import smart_unicode
 from django.core.paginator import Paginator
 from django.core.files import File
 
 from webalyzer.collector.models import Page
 from webalyzer.collected.models import Screenshot
-from webalyzer.analyzer.models import Result, Suspect
 
 
 gator = Gator(settings.ALLIGATOR_CONN)
@@ -117,9 +101,6 @@ def find_page_title(page_id):
     html = page.html.strip()
     tree = etree.fromstring(html, parser).getroottree()
     dom = tree.getroot()
-    # lxml inserts a doctype if none exists, so only include it in
-    # the root if it was in the original html.
-    root = tree if html.startswith(tree.docinfo.doctype) else dom
 
     for element in CSSSelector('title')(dom):
         page.title = element.text.strip()
@@ -232,7 +213,7 @@ def generate_screenshot(page_id):
             raise Exception("No PNG file created")
 
         with open(png_file, 'rb') as f:
-            screenshot = Screenshot.objects.create(
+            Screenshot.objects.create(
                 page=page,
                 file=File(f),
                 width=width,
