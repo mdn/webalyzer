@@ -154,7 +154,7 @@ TEMPLATE_LOADERS = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
-ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='locmem://')
+ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='redis://localhost:6379/1')
 
 
 PIPELINE_CSS = {

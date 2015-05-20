@@ -9,6 +9,7 @@ Requirements
 ------------
 
 * PostgreSQL
+* Redis
 * Python & pip
 * node & npm
 
@@ -56,9 +57,13 @@ Add `webalyzer.dev` to your `/etc/hosts` file:
 Run
 ---
 
-Use the django runserver:
+Run the django server:
 
-        python manage.py runserver
+        sudo python manage.py runserver 127.0.0.1:80
+
+Run the Alligator worker:
+
+        python manage.py run-gator
 
 Use locally
 -----------
@@ -72,4 +77,4 @@ Use locally
 
 3. Go to the collected analysis page: http://webalyzer.dev/analyzer/
 
-4. Enter your `data-webalyzer` attribute value and click "Start Analysis"
+4. Enter your `data-webalyzer` attribute value (e.g., `example.com`) and click "Start Analysis"
