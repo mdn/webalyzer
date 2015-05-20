@@ -63,7 +63,7 @@ for app in config('EXTRA_APPS', default='', cast=Csv()):
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -154,7 +154,7 @@ TEMPLATE_LOADERS = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
-ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='redis://localhost:6379/1')
+ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='locmem://')
 
 
 PIPELINE_CSS = {

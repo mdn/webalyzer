@@ -49,6 +49,10 @@ Collect static assets:
 
         python manage.py collectstatic
 
+Add `webalyzer.dev` to your `/etc/hosts` file:
+
+        127.0.0.1 webalyzer.dev
+
 Run
 ---
 
@@ -61,11 +65,11 @@ Use locally
 
 1. Add a `<script>` tag to your page for `collect.js`:
 
-        <script src="http://127.0.0.1:8000/static/collect.js"
+        <script src="http://webalyzer.dev/static/collect.js"
         data-webalyzer="example.com"></script>
 
 2. Hit your page(s)
 
-3. Go to the collected analysis page: http://127.0.0.1:8000/analyzer/
+3. Go to the collected analysis page: http://webalyzer.dev/analyzer/
 
-
+4. Enter your `data-webalyzer` attribute value and click "Start Analysis"
