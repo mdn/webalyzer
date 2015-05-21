@@ -16,7 +16,7 @@ Requirements
 Setup
 -----
 
-Install everything in the `requirements.txt` file:
+1. Install python requirements from the `requirements.txt` file:
 
         pip install -r requirements.txt
 
@@ -26,40 +26,31 @@ assure you don't install anything that hasn't been vetted for:
         pip install peep
         peep install -r requirements.txt
 
-For the CSS parsing you need the [crass](https://github.com/mattbasta/crass) nodejs module installed
-and made available on the `PATH`:
+2. Install node requirements:
 
         npm install -g crass yuglify
 
-Create postgres database:
+3. Create postgres database:
 
         createdb webalyzer
 
-Add default environment variable settings in `.env`:
+4. Add default environment variable settings in `.env`:
         
         SECRET_KEY=terrible-secret
         DEBUG=True
         ALLOWED_HOSTS=*
         DATABASE_URL=postgresql://<username>@localhost:5432/webalyzer
 
-Run migrations:
+5. Run migrations:
 
         python manage.py migrate
-
-Collect static assets:
-
-        python manage.py collectstatic
-
-Add `webalyzer.dev` to your `/etc/hosts` file:
-
-        127.0.0.1 webalyzer.dev
 
 Run
 ---
 
 Run the django server:
 
-        sudo python manage.py runserver 127.0.0.1:80
+        sudo python manage.py runserver
 
 Run the Alligator worker:
 
@@ -70,11 +61,11 @@ Use locally
 
 1. Add a `<script>` tag to your page for `collect.js`:
 
-        <script src="http://webalyzer.dev/static/collect.js"
+        <script src="http://127.0.0.1:8000/static/collect.js"
         data-webalyzer="example.com"></script>
 
 2. Hit your page(s)
 
-3. Go to the collected analysis page: http://webalyzer.dev/analyzer/
+3. Go to the collected analysis page: http://127.0.0.1:8000/analyzer/
 
 4. Enter your `data-webalyzer` attribute value (e.g., `example.com`) and click "Start Analysis"
