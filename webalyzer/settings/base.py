@@ -63,7 +63,7 @@ for app in config('EXTRA_APPS', default='', cast=Csv()):
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -176,10 +176,10 @@ PIPELINE_CSS = {
 PIPELINE_JS = {
     'angular': {
         'source_filenames': (
-            'analyzer/angular/angular.min.js',
-            'analyzer/angular/angular-cookies.min.js',
-            'analyzer/angular/angular-sanitize.min.js',
-            'analyzer/angular/angular-ui-router.min.js',
+            'angular/angular.min.js',
+            'angular/angular-cookies.min.js',
+            'angular/angular-sanitize.min.js',
+            'angular/angular-ui-router.min.js',
         ),
         'output_filename': 'js/angular.js',
     },

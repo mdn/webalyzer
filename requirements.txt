@@ -22,8 +22,6 @@ django-csp==2.0.3
 # sha256: drxjpOLV5aDfd8p9GPD1bixGz7YrcRA7qSqSx5-rHgM
 nose==1.3.4
 
-# sha256: Fe-WqPNOuOfMbg7SjqTVYTFf2b44ss4ceRszk5S_8_o
-https://github.com/django-nose/django-nose/archive/ae2c1bb.zip#egg=django-nose
 # sha256: Js7zxvYt8u7pVaJRld5veTiBMXwPX9GhxvniLzUakxM
 # sha256: 7ZCm7YglpRbGU_yQmcBTvjNbZPoASpA6GBt-AUiOxdQ
 django-nose==1.4
