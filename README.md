@@ -16,12 +16,14 @@ Requirements
 Setup
 -----
 
-1. Create and activate a virtual environment:
+1. Start your PostgreSQL and Redis servers
+
+2. Create and activate a virtual environment:
 
         virtualenv venv
         source venv/bin/activate
 
-1. Install python requirements from the `requirements.txt` file:
+3. Install python requirements from the `requirements.txt` file:
 
         pip install -r requirements.txt
 
@@ -31,22 +33,22 @@ assure you don't install anything that hasn't been vetted for:
         pip install peep
         peep install -r requirements.txt
 
-2. Install node requirements:
+4. Install node requirements:
 
         npm install -g crass yuglify
 
-3. Create postgres database:
+5. Create postgres database:
 
         createdb webalyzer
 
-4. Add default environment variable settings in `.env`:
+6. Add default environment variable settings in `.env` file:
         
         SECRET_KEY=terrible-secret
         DEBUG=True
         ALLOWED_HOSTS=*
         DATABASE_URL=postgresql://<username>@localhost:5432/webalyzer
 
-5. Run migrations:
+7. Run migrations:
 
         python manage.py migrate
 
@@ -55,7 +57,7 @@ Run
 
 Run the django server:
 
-        sudo python manage.py runserver
+        python manage.py runserver
 
 Run the Alligator worker:
 
