@@ -16,6 +16,11 @@ Requirements
 Setup
 -----
 
+1. Create and activate a virtual environment:
+
+        virtualenv venv
+        source venv/bin/activate
+
 1. Install python requirements from the `requirements.txt` file:
 
         pip install -r requirements.txt
