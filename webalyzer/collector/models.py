@@ -10,6 +10,7 @@ class Page(models.Model):
     title = models.TextField(null=True)
     added = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    source_hash = models.IntegerField(default=0, db_index=True)
 
     def __unicode__(self):
         return self.url
@@ -32,6 +33,7 @@ class Stylesheet(models.Model):
     size = models.PositiveIntegerField(default=0)
     added = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    source_hash = models.IntegerField(default=0, db_index=True)
 
     def __unicode__(self):
         return self.url
