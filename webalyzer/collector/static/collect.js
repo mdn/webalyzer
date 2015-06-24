@@ -23,7 +23,7 @@
 
   function _post(data, cb) {
     var req = request();
-    req.open('POST', 'http://127.0.0.1:8000/collector/');
+    req.open('POST', 'https://webalyzer.dev/collector/');
     req.onreadystatechange = function (response) {
       if (req.readyState === 4) {
         cb(req.status);

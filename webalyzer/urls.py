@@ -18,3 +18,7 @@ urlpatterns = patterns(
         include('webalyzer.analyzer.urls', namespace='analyzer')
     ),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+import djcelery
+djcelery.setup_loader()

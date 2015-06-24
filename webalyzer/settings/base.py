@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django_nose',
     'pipeline',
     'sorl.thumbnail',
+    'djcelery',
+    # 'kombu.transport.django',
 
     # Django apps
     'django.contrib.admin',
@@ -154,8 +156,20 @@ TEMPLATE_LOADERS = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
-ALLIGATOR_CONN = config('ALLIGATOR_CONN', default='redis://localhost:6379/1')
+CELERY_RESULT_BACKEND = config(
+    'CELERY_RESULT_BACKEND',
+    'redis://localhost:6379/1'
+)
 
+# # CELERY_BROKER_URL = config(
+# #     'CELERY_BROKER_URL',
+# #     'redis://localhost:6379/1'
+# # )
+# CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+
+BROKER_URL = config('BROKER_URL', 'django://')
+
+# CELERY_RESULT_BACKEND = 'redis'
 
 PIPELINE_CSS = {
     'skeleton': {
