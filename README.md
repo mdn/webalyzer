@@ -42,7 +42,7 @@ assure you don't install anything that hasn't been vetted for:
         createdb webalyzer
 
 6. Add default environment variable settings in `.env` file:
-        
+
         SECRET_KEY=terrible-secret
         DEBUG=True
         ALLOWED_HOSTS=*
@@ -59,9 +59,18 @@ Run the django server:
 
         python manage.py runserver
 
-Run the Alligator worker:
+Run the message queue worker:
 
-        python manage.py run-gator
+        python manage.py celeryd
+
+
+By default the message queue (using celery) uses the same database as
+the site depends on. This makes it easy for local development.
+
+To override this to use a RabbitMQ server or something like that set the
+environment variable `BROKER_URL`. For example:
+
+        export BROKER_URL="amqp://guest:guest@localhost:5672//"
 
 Use locally
 -----------

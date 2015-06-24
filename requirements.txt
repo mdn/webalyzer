@@ -41,11 +41,10 @@ ipython==2.3.1
 # Wheel
 # sha256: ygF2j97N4TQwHzFwdDIm9g7f9cOTXxJDc3jr2RFQY1M
 dj-database-url==0.3.0
-
-# sha256: X4aqvtTqlNkw3aYh6xlFgSNpcVACrt1OlVs6oLqKc8g
-# sha256: mWV1Iecfv6KfvMkmAF5UjPexfl2fxVXa05uPXs-8c_A
-# sha256: 9MtzwupJxQm6OvJNmtir7U6kLZgJs6guzTNxhkwl5F0
-mincss==0.8.5
+# sha256: LNJ4-dD_p24H_DoS-ZJWxmLphYDyfcr56mfy9O2MdpQ
+# sha256: __zKBj0xFp19p-I7PAAe9_MUzvsgRlCSIXLW02VSSb8
+# sha256: 8FE-bijOu4KZ58wcRNFlUT-lEu0IVxSldwNiLTynbvI
+mincss==0.8.6
 # sha256: BTWn4nAUh0snrjpNM-h0njRb36YnZhlSCLeZa_EQBoI
 cssselect==0.9.1
 # sha256: 8DnhdbUqDnmH28j5L_FwE3muz-3sVo5cjw8Ox-5dTlQ
@@ -88,11 +87,6 @@ ndg-httpsclient==0.3.2
 # sha256: xMQmSMaK_U4YJIY2XII6nNjnVXDWz0kJ1_CUgzP7PCA
 # sha256: 5PgdU8Uz9r2VJrBH8Ef3sQHCSrFzOcGnrY-YslwQHqs
 pyasn1==0.1.7
-# sha256: zMR9klCon4S2qqbQLTIJ-I1XYcEntrRqMkLiX7f2yP0
-# sha256: qzEpwYSny3zg1Z55Reek8p3nIeixc3odHtzNV7500kw
-alligator==0.9.0
-# sha256: pPs3sChg9rFhf2RpSHRx_Qht0tOLvOZAwgVYYrnEAZw
-redis==2.10.3
 # sha256: MVg9nhJ2eR2EqgFv3IeR_RhSisV5fbrhGLMOMuApDE8
 django-jsonview==0.4.3
 # sha256: tA777GxXkjVRMquS0OBIu9C7mdSOoxIcDdeIUE68oto
@@ -142,3 +136,32 @@ Pillow==2.8.1
 # sha256: SqEp342QB7GSv4IBP0FVM5lGUtfKqTDQAmh-tCpsKkE
 # sha256: uLfjVjC1U54moZffxgBb6eHpoTVJazd3I6jrwBuby_8
 pep8==1.6.2
+# sha256: 2_WWGNWp7_Fy0lAh82YUvlrwUB5FJ5dcpQS5WGPxT-0
+# sha256: CST5QHDG_FfUCLFphIxbOIMmaP_-Bg5ItIA_sj4OPq8
+celery==3.1.18
+# sha256: mWbSw_hrIzdNqYkFhPFrA_bkYFWCTjChCHFpdNRdHkU
+# sha256: 98W-TbhvGnbMxMgH-QCFNidavsPigV0YJl1pSu7zyzw
+# sha256: bOkY5I2u1knhOqTrLOmdgCEkEUAb5CKIyURzqBEJJE4
+# sha256: ZEHnmPiGN0TJBXTeJTvtMoxHf9LIbK9SuNnYXx7Ln5Y
+# sha256: TWTtG54OcwlfXPqH8Ol920yEAEno7-t-Y7RhGLodYjo
+# sha256: Oe8FQeSJsc9VFc7fGx-Z3lhf1mBGPNzeQ6A9fZIEJ4I
+# sha256: aFsZlAJlchd0WK8UPMJKIIL0APGOY_3I4u1o3ZO7D0k
+# sha256: hEYBPfvemz9Pm_6glBjd1SZ2CoeYxBut0_cHqYrQdFs
+# sha256: 1f9wYInpFQdg0ji2YgOiTUoKYXUWBBAZGZX_BNGJP6o
+# sha256: p4tITVRy3Yxoj4s-7hhkaiXGbORbLCZlKFD2r5zlKxc
+# sha256: xO5wy0B_koRResNo8SHPB5anE0uWHlPZ2vGqro9E-5A
+# sha256: APNfsOfi_DSM0JHSXTbGdotyFGPRI5bWipSRqKX5Hs8
+pytz==2015.4
+# sha256: aI-UZrHDrhQQY4Hm29MoEV51xSYMVC60jmxGkx9pKMw
+billiard==3.3.0.20
+# sha256: _qhlOuS4en6wmWWUCfCeaANqe4PwoVoLxq7629mKUdw
+# sha256: H1ZavUTEt9-qTdVD1S-YLS8AaroKKzgwVCtNJagB_gk
+kombu==3.0.26
+# sha256: N4Ethjya0-NcBzTELgvwMgzow77YLNIK1UyzTRWBV7o
+anyjson==0.3.3
+# sha256: 406XZaYSD0ZkwSD0GYp4bDmg-35KWb0ZotbjqIS2OIk
+# sha256: 68_IZ95aaPn1uhTRHbrYjmr_hDWo05M51c6w5bBt5kA
+amqp==1.4.6
+# sha256: B6nGUKHyDgQM9f_9C82SCoHQc0kVEw2JjAMlxfr7LsQ
+# sha256: uiqjz1S7cQ9G8WiJ-hgzExdFipLiUxvo4-jTg-_UoU0
+django-celery==3.1.16
