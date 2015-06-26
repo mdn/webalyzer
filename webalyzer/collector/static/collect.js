@@ -1,15 +1,12 @@
-!setTimeout(function() {
-
-  var domain, script = document.querySelector('script[data-webalyzer]');
-  if (script === null || (script !== null && !script.dataset.webalyzer)) {
-    console.warn(
-      "You have not set up your webalyzer collector " +
-      "correctly. It needs to have the domain in the script tag. " +
-      "For example: <script data-webalyzer=\"example.com\">"
-    );
-  } else {
-    domain = script.dataset.webalyzer;
-  }
+var Webalyzer = function(domain, options) {
+  options = options || {};
+  options.doSend = options.doSend || function(html, url) {
+    return true;
+  };
+  options.beforeSendHTML = options.beforeSendHTML || function(html, url) {
+    return html;
+  };
+  options.destination = options.destination || 'https://webalyzer.dev/collector/';
 
   var request = function() {
     if (window.XMLHttpRequest) {
@@ -34,7 +31,7 @@
 
   function _post(data, cb) {
     var req = request();
-    req.open('POST', 'https://webalyzer.dev/collector/');
+    req.open('POST', options.destination);
     req.onreadystatechange = function (response) {
       if (req.readyState === 4) {
         cb(req.status);
@@ -138,7 +135,12 @@
 
   function collect(callback) {
     // send the HTML
-    postHTML(document.documentElement.outerHTML, callback);
+    var html = document.documentElement.outerHTML;
+    if (!options.doSend(html, document.location.href)) {
+      return;
+    }
+    html = options.beforeSendHTML(html, document.location.href);
+    postHTML(html, callback);
 
     // send the stylesheets
     var collected = JSON.parse(
@@ -178,7 +180,9 @@
   }
   loop();
 
-  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  var MutationObserver = window.MutationObserver ||
+                         window.WebKitMutationObserver ||
+                         window.MozMutationObserver;
   if (MutationObserver) {
     var locked = null;
     function lock(cb) {
@@ -196,12 +200,13 @@
       });
     });
 
-    // configuration of the observer:
-    var config = { attributes: true, childList: true, characterData: true, subtree: true };
-
     // pass in the target node, as well as the observer options
-    // observer.observe(document.body, config);
-    observer.observe(document.body, config);
+    observer.observe(document.body, {
+      attributes: true,
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
   }
 
-}, 1.0 * 1000);
+};

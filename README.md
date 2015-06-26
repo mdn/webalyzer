@@ -77,11 +77,42 @@ Use locally
 
 1. Add a `<script>` tag to your page for `collect.js`:
 
-        <script src="http://127.0.0.1:8000/static/collect.js"
-        data-webalyzer="example.com"></script>
+        <script>
+        (function() {
+        var s = document.createElement('script');
+        s.src = 'http://127.0.0.1:8000/static/collect.js';
+        document.head.appendChild(s); s.async=true; s.onload=function() {
+            Webalyzer('example.com');
+        }})();
+        </script>
 
 2. Hit your page(s)
 
 3. Go to the collected analysis page: http://127.0.0.1:8000/analyzer/
 
-4. Enter your `data-webalyzer` attribute value (e.g., `example.com`) and click "Start Analysis"
+There are configuration options available for when you initialize the
+`Webalyzer` in that script snippet. For example, instead of:
+
+        Webalyzer('example.com');
+
+You can do this:
+
+        Webalyzer('example.com', {
+             doSend: function(html, url) {
+                 if (getWeather() === 'raining') {
+                     return false;
+                 }
+                 return true;
+             },
+             beforeSendHTML: function(html, url) {
+                 return html.replace(/negative/g, 'positive');
+             },
+        });
+
+The `doSend` function gives you an opportunity to cancel the sending,
+by returning `false`. You could potentially use this to throttle some
+of the traffic or perhaps you only want it sent depending on some other
+condition.
+
+The `beforeSendHTML` gives you an opportunity to change the HTML that's
+going to be sent. For example, you might scrub something in the content.
