@@ -15,12 +15,16 @@ def collect(request):
 
     url = request.POST['url']
     domain = request.POST.get('domain', urlparse(url).netloc)
+    source_hash = request.POST['source_hash']
     # print (url, domain)
 
     if request.POST.get('css'):
         # it's a stylesheet!
         css = request.POST['css']
-        for page in Stylesheet.objects.filter(url=url, domain=domain):
+        for page in Stylesheet.objects.filter(
+                url=url,
+                domain=domain,
+                source_hash=source_hash):
             if page.css == css:
                 created = False
                 break
@@ -28,6 +32,7 @@ def collect(request):
             page = Stylesheet.objects.create(
                 url=url,
                 domain=domain,
+                source_hash=source_hash,
                 css=css,
             )
             created = True
@@ -40,7 +45,10 @@ def collect(request):
 
     else:
         html = request.POST['html']
-        for page in Page.objects.filter(url=url, domain=domain):
+        for page in Page.objects.filter(
+                url=url,
+                domain=domain,
+                source_hash=source_hash):
             if page.html == html:
                 created = False
                 break
@@ -48,6 +56,7 @@ def collect(request):
             page = Page.objects.create(
                 url=url,
                 domain=domain,
+                source_hash=source_hash,
                 html=html,
             )
             created = True
@@ -61,4 +70,27 @@ def collect(request):
     response = http.HttpResponse(
         'OK', status=created and 201 or 200)
     response['Access-Control-Allow-Origin'] = '*'
+    return response
+
+
+def collect_check(request, source_hash, source_type, domain):
+    source_hash = int(source_hash)
+    matches = 0
+
+    # do we have a counter to increment?
+    # do we want to update the date?
+
+    if source_type == 'css':
+        matches = Stylesheet.objects.filter(source_hash=source_hash,
+                                            domain=domain)
+    elif source_type == 'html':
+        matches = Page.objects.filter(source_hash=source_hash, domain=domain)
+
+    if matches.exists():
+        response = http.HttpResponse('OK', status=200)
+    else:
+        response = http.HttpResponse('Not Found', status=404)
+
+    response['Access-Control-Allow-Origin'] = '*'
+
     return response

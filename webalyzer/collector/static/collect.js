@@ -19,6 +19,17 @@
     } else {
       throw "Unable to XHR at all";
     }
+  };
+
+  function _postHash(source_hash, type, domain, cb) {
+    var req = request();
+    req.open('head', 'http://127.0.0.1:8000/collector/check/' + type + '/'+ domain + '/' + source_hash);
+    req.onreadystatechange = function (response) {
+      if (req.readyState === 4) {
+        cb(req.status);
+      }
+    };
+    req.send();
   }
 
   function _post(data, cb) {
@@ -42,43 +53,85 @@
     };
     req.send();
   }
+
   function postCSS(url, callback) {
     _getCSS(url, function(status, response) {
       if (status === 200) {
-        var req = request();
-        var data = new FormData();
-        data.append('url', url);
-        data.append('domain', domain);
-        data.append('css', response);
-        _post(data, function(status) {
-          if (status === 200) {
-            console.log("We have already collected this CSS");
-            if (callback) callback(url, false);
-          } else if (status === 201) {
-            console.log("Yum! Collected another chunk of CSS");
-            if (callback) callback(url, true);
+        var source_hash = makeHash(response);
+
+        _postHash(source_hash, 'css', domain, function(status) {
+          if(status === 200) {
+            console.log('We have already collected CSS matching ' + source_hash);
           } else {
-            console.warn("Failed to collect the CSS of this page");
+            console.log('Sending CSS.');
+            var req = request();
+            var data = new FormData();
+            data.append('url', url);
+            data.append('domain', domain);
+            data.append('css', response);
+            data.append('source_hash', source_hash);
+            _post(data, function(status) {
+              if (status === 200) {
+                console.log("We have already collected this CSS");
+                if (callback) {
+                  callback(url, false);
+                }
+              } else if (status === 201) {
+                console.log("Yum! Collected another chunk of CSS");
+                if (callback) {
+                    callback(url, true);
+                }
+              } else {
+                console.warn("Failed to collect the CSS of this page");
+              }
+            });
           }
         });
       }
     });
   }
 
+  // hashCode() from http://erlycoder.com/49/javascript-hash-functions-to-convert-string-into-integer-hash-
+  function makeHash(source) {
+    var hash = 0;
+    if (source.length === 0) return hash;
+    for (var i = 0; i < source.length; i++) {
+        var char = source.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+  }
+
   function postHTML(html, callback) {
-    var data = new FormData();
-    data.append('url', document.location.href);
-    data.append('domain', domain);
-    data.append('html', html);
-    _post(data, function(status) {
-      if (status === 200) {
-        console.log("We have already collected this HTML");
-        if (callback) callback(false);
-      } else if (status === 201) {
-        console.log("Yum! Collected another chunk of HTML");
-        if (callback) callback(true);
-      } else {
-        console.warn("Failed to collect the HTML of this page");
+    var source_hash = makeHash(html);
+
+    _postHash(source_hash, 'html', domain, function(status) {
+        if(status === 200) {
+          console.log('We have already collected HTML matching ' + source_hash);
+        } else {
+          console.log('Sending HTML.');
+
+        var data = new FormData();
+        data.append('url', document.location.href);
+        data.append('domain', domain);
+        data.append('html', html);
+        data.append('source_hash', source_hash);
+        _post(data, function(status) {
+          if (status === 200) {
+            console.log("We have already collected this HTML");
+            if (callback) {
+              callback(false);
+            }
+          } else if (status === 201) {
+            console.log("Yum! Collected another chunk of HTML");
+            if (callback) {
+              callback(true);
+            }
+          } else {
+            console.warn("Failed to collect the HTML of this page");
+          }
+        });
       }
     });
   }
@@ -103,7 +156,7 @@
               "sessionStorage.removeItem('webalyzedcss" + domain +"')\n"
             );
           }
-          collected.push(url)
+          collected.push(url);
           sessionStorage.setItem(
             'webalyzedcss' + domain,
             JSON.stringify(collected)
@@ -117,7 +170,7 @@
   var timer;
   function loop() {
     collect(function(newhtml) {
-      interval *= newhtml && .5 || 2;
+      interval *= newhtml && 0.5 || 2;
       if (!MutationObserver) {
         timer = setTimeout(loop, interval * 1000);
       }
