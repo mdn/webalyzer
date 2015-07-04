@@ -6,7 +6,7 @@ var Webalyzer = function(domain, options) {
   options.beforeSendHTML = options.beforeSendHTML || function(html, url) {
     return html;
   };
-  options.destination = options.destination || 'https://webalyzer.dev/collector/';
+  options.server = options.server || 'https://webalyzer.dev/collector/';
 
   var request = function() {
     if (window.XMLHttpRequest) {
@@ -20,7 +20,7 @@ var Webalyzer = function(domain, options) {
 
   function _postHash(source_hash, type, domain, cb) {
     var req = request();
-    req.open('head', 'http://127.0.0.1:8000/collector/check/' + type + '/'+ domain + '/' + source_hash);
+    req.open('HEAD', options.server + 'check/' + type + '/'+ domain + '/' + source_hash);
     req.onreadystatechange = function (response) {
       if (req.readyState === 4) {
         cb(req.status);
@@ -31,7 +31,7 @@ var Webalyzer = function(domain, options) {
 
   function _post(data, cb) {
     var req = request();
-    req.open('POST', options.destination);
+    req.open('POST', options.server);
     req.onreadystatechange = function (response) {
       if (req.readyState === 4) {
         cb(req.status);

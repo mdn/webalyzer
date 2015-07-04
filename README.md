@@ -81,9 +81,9 @@ Use locally
         (function() {
         var s = document.createElement('script');
         s.src = 'http://127.0.0.1:8000/static/collect.js';
-        document.head.appendChild(s); s.async=true; s.onload=function() {
+        s.async=true; s.onload=function() {
             Webalyzer('example.com');
-        }})();
+        } document.head.appendChild(s)})();
         </script>
 
 2. Hit your page(s)
