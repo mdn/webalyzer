@@ -1,4 +1,3 @@
-import re
 from django.conf.urls import patterns, url
 
 from webalyzer.collector import views
