@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'pipeline',
     'sorl.thumbnail',
     'djcelery',
-    # 'kombu.transport.django',
+    'kombu.transport.django',
 
     # Django apps
     'django.contrib.admin',
